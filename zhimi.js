@@ -129,8 +129,8 @@ if(text("开始学习").findOnce() != null){
 }
 
 // 巩固今日所学
-if(text("巩固今日所学").findOnce() != null){
-    var isStart = text("巩固今日所学").findOnce().bounds()
+if(text("学习计划").findOnce() != null && text("开始学习").findOnce() == null){
+    var isStart = text("复习").findOnce().bounds()
     click(isStart.centerX(), isStart.centerY())
     toastLog("开始巩固今日所学")
     sleep(1000)
@@ -143,8 +143,8 @@ if(text("巩固今日所学").findOnce() != null){
             try{
                 if(textContains("验证拼写").findOnce() != null){
                     think = Math.floor(Math.random()*10) % 4 + 4
-                    sleep(1000 * think)
                     toastLog("思考" + think + "秒。。。")
+                    sleep(1000 * think)
                     var clickCenter = textContains("验证拼写").findOnce().bounds()
                     click(clickCenter.centerX(), clickCenter.centerY())
                     sleep(1000)
@@ -162,7 +162,7 @@ if(text("巩固今日所学").findOnce() != null){
                         break;
                     }
                     else{
-                        toastLog("开始第" + count + "次巩固！")
+                        toastLog("开始第" + (count + 1) + "次巩固！")
                     }
                     var again = text("再来一遍").findOnce().bounds()
                     click(again.centerX(), again.centerY())
