@@ -105,8 +105,24 @@ if(text("开始学习").findOnce() != null){
             
         }
         catch(e){
-            console.log(e);
-            console.log("这2.0版不知道发生了什么，但是似乎还能用");
+            // 大概率出现卡死在分享页面
+            if(textContains("分享").findOnce() != null){
+                for(var i = 0; i < 3; i++){
+                    back();
+                    sleep(1000)
+                }
+                home()
+                toastLog("学习完毕，已领取奖励，接下来开始巩固今日所学！")
+                launchApp("知米背单词");
+                text("训练").findOne()
+                sleep(1000)
+                break;
+            }
+            else{
+                console.log(e);
+                console.log("这2.0版不知道发生了什么，但是似乎还能用");
+            }
+            
         }
         
     }
@@ -155,8 +171,19 @@ if(text("巩固今日所学").findOnce() != null){
                 
             }
             catch(e){
-                console.log(e);
-                console.log("这2.0版不知道发生了什么，但是似乎还能用");
+                if(text("结束").findOnce() != null){
+                    if(count > 2){
+                        var exit = text("结束").findOnce.bounds()
+                        click(exit.centerX(), exit.centerY())
+                        back()
+                        break;
+                    }
+                }
+                else{
+                    console.log(e);
+                    console.log("这2.0版不知道发生了什么，但是似乎还能用");
+                }
+                
             }
         }
         toastLog("知米背单词任务结束！")
